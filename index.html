@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="script/script.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/homeStyle.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar" id="mainNav">
+      <div class="container">
+        <!-- Hamburger Menu Button -->
+        <!-- <div class="hamburger-menu" >
+                <span></span>
+                <span></span>
+                <span></span>
+            </div> -->
+        <i
+          class="fa-solid fa-bars fa-1x hamburger-menu"
+          onclick="toggleMenu()"
+        ></i>
+        <!-- Logo -->
+        <a class="navbar-brand" href="#page-top">
+          <img src="img/asalalogo.png" alt="brand-logo" />
+        </a>
+
+        <div class="navbar-links">
+          <i class="fa-solid fa-x" onclick="toggleMenu()"></i>
+          <!-- Navigation Links -->
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-items">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Products.html">Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about_us.html">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login.html">Login</a>
+              </li>
+              <!-- Shopping Bag Icon -->
+              <li class="nav-item shopping-bag">
+                <a class="nav-link" href="cart.html"
+                  ><i class="fas fa-shopping-bag"></i
+                ></a>
+              </li>
+ 
+            </ul>
+          </div>
+         
+          <!-- Social Icons -->
+          <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="https://www.instagram.com" target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="https://wa.me/1234567890" target="_blank"
+              ><i class="fab fa-whatsapp"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CSS -->
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Exquisite Jewelry for Every Occasion</h1>
+        <p class="hero-subtitle">
+          Discover timeless elegance and stunning designs that inspire.
+        </p>
+        <a href="Products.html" class="hero-btn">Shop Now</a>
+      </div>
+    </section>
+
+    <!-- Latest Offers Section -->
+
+    <!-- New Offer Section -->
+    <div class="offer-container">
+      <div class="offer-text">
+        <h2>Up to 40% Off Storewide</h2>
+        <p>Last Minute Gifts</p>
+        <a href="#" class="shop-now">Shop Now</a>
+      </div>
+      <div class="offer-video">
+        <video autoplay loop muted>
+          <source
+            src="img\04d08d77c2b0b20a8d6c76ad85d7a2c2.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- Best Sellers Section -->
+    <section id="best-sellers" class="best-sellers">
+      <header id="best-sellers-header" class="best-sellers-header">
+        <div class="container">
+          <h2 class="section-title">Best Sellers</h2>
+        </div>
+      </header>
+      <div class="container">
+        <div class="product-items">
+          <div class="product-item">
+            <img src="img/product1.jpg" alt="Product 1" />
+            <div class="product-info">
+              <h3>Product 1</h3>
+              <p>Short description of the product.</p>
+              <div class="price">
+                <span class="original-price">₪99.99</span>
+                <!-- السعر الأصلي مع الشحطة -->
+                <span class="new-price">₪69.99</span>
+              </div>
+              <a href="#" class="btn">Buy Now</a>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="img/product2.jpg" alt="Product 2" />
+            <div class="product-info">
+              <h3>Product 2</h3>
+              <p>Short description of the product.</p>
+              <div class="price">
+                <span class="original-price">₪49.99</span>
+                <!-- السعر الأصلي مع الشحطة -->
+                <span class="new-price">₪34.99</span>
+              </div>
+              <a href="#" class="btn">Buy Now</a>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="img/product3.jpg" alt="Product 3" />
+            <div class="product-info">
+              <h3>Product 3</h3>
+              <p>Short description of the product.</p>
+              <div class="price">
+                <span class="original-price">₪69.99</span>
+                <!-- السعر الأصلي مع الشحطة -->
+                <span class="new-price">₪54.99</span>
+              </div>
+              <a href="#" class="btn">Buy Now</a>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="img/product4.jpg" alt="Product 4" />
+            <div class="product-info">
+              <h3>Product 4</h3>
+              <p>Short description of the product.</p>
+              <div class="price">
+                <span class="original-price">₪89.99</span>
+                <!-- السعر الأصلي مع الشحطة -->
+                <span class="new-price">₪74.99</span>
+              </div>
+              <a href="#" class="btn">Buy Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+      <div class="container">
+        <h2 class="section-title">Why Choose Us?</h2>
+        <div class="reasons-container">
+          <div class="reason-item">
+            <i class="fas fa-gem"></i>
+            <p>High-Quality Materials</p>
+          </div>
+          <div class="reason-item">
+            <i class="fas fa-truck"></i>
+            <p>Fast and Reliable Delivery</p>
+          </div>
+          <div class="reason-item">
+            <i class="fas fa-headphones"></i>
+            <p>24/7 Customer Support</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section class="customer-reviews">
+      <div class="container">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="reviews-container">
+          <div class="review-item">
+            <p>
+              "Amazing quality and fast delivery! I loved the necklace I
+              bought."
+            </p>
+            <span>- Sarah, New York</span>
+          </div>
+          <div class="review-item">
+            <p>"Beautiful designs and great service. Highly recommended!"</p>
+            <span>- John, California</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Video Section -->
+    <!-- Product Video Section -->
+    <section class="product-video">
+      <div class="promo-container">
+        <div class="promo-video">
+          <video class="styled-video" autoplay loop controls>
+            <source
+              src="img/e5262c357aea270d1be63bc0b19541d2_t4.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="promo-text">
+          <h2>Discover Our New Collection</h2>
+          <p>
+            Immerse yourself in elegance and innovation with our latest styles.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- Login Call-to-Action Section -->
+    <section class="login-cta">
+      <div class="container">
+        <h2>Join Our Community</h2>
+        <p>Sign in to access exclusive offers and manage your orders</p>
+        <div class="cta-buttons">
+          <a href="login.html" class="login-button">Login</a>
+          <a href="register.html" class="register-button">Register</a>
+        </div>
+      </div>
+    </section>
+    <div id="cart" style="display: none;">
+  <h2>عربة التسوق</h2>
+  <ul id="cart-items"></ul>
+  <div id="cart-total">المجموع: 0₪</div>
+  <button id="checkout-button" onclick="checkout()">إتمام الشراء</button>
+</div>
+
+
+    <!-- Contact Info Section -->
+    <section class="contact-info">
+      <p>Contact us at: <a href="tel:+1234567890">+123 456 7890</a></p>
+      <p>
+        Email: <a href="mailto:info@yourwebsite.com">info@yourwebsite.com</a>
+      </p>
+    </section>
+
+    <script>
+      function toggleMenu() {
+        var menu = document.querySelector(".navbar-links");
+        menu.classList.toggle("active");
+      }
+    </script>
+    <script src="script/products.js"></script>
+    <script>// مثال لإضافة عنصر إلى السلة
+      function addToCart(name, price) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push({ name, price });
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(`${name} تمت إضافته إلى السلة!`);
+      }
+      </script>
+  </body>
+</html>

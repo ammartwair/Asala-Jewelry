@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سلة التسوق</title>
+  <link rel="stylesheet" href="style.css"> <!-- ربط ملف CSS -->
+  <script src="cart.js" defer></script> <!-- ربط ملف JavaScript -->
+  <style>#cart-container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  #cart-items {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #cart-items li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #cart-total {
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  button.checkout-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>سلة التسوق</h1>
+  </header>
+  <main id="cart-container">
+    <ul id="cart-items"></ul>
+    <div id="cart-total">المجموع: 0₪</div>
+    <button onclick="checkout()">إتمام الشراء</button>
+  </main>
+
+
+  <script>let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // عرض محتوى السلة
+    function renderCart() {
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      const cartCount = document.getElementById('cart-count');
+    
+      cartItems.innerHTML = ''; // تنظيف القائمة
+      let total = 0;
+    
+      cart.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${item.name} - ${item.price}₪`;
+        cartItems.appendChild(li);
+    
+        total += item.price;
+      });
+    
+      cartTotal.textContent = `المجموع: ${total}₪`;
+      cartCount.textContent = cart.length;
+    }
+    
+    // إضافة عنصر إلى السلة
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+    
+    // تنفيذ عملية الشراء
+    function checkout() {
+      if (cart.length === 0) {
+        alert('السلة فارغة!');
+        return;
+      }
+      alert('تمت عملية الشراء بنجاح!');
+      cart = [];
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+    
+    // تحديث السلة عند تحميل الصفحة
+    window.onload = renderCart;</script>
+</body>
+</html>

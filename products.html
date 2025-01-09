@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="css/homeStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>/* Product Grid Layout */
+       /* Reset Styles */
+       * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      /* Navbar Core Styles */
+      .navbar {
+        background: #fff;
+        padding: 15px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      .navbar-links {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+        justify-content: space-between;
+      }
+      .navbar-links .fa-x {
+        display: none;
+      }
+      .container {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .navbar-brand {
+        width: 50%;
+      }
+      .navbar-brand img {
+        height: 40px;
+        width: auto;
+      }
+      
+      .nav-links {
+        flex: 1;
+        margin: 0 20px;
+      }
+      
+      .navbar-items {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        gap: 30px;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .navbar-items a {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      
+      .navbar-items a:hover {
+        color: #92774e;
+      }
+      
+      .nav-icons {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      
+      .social-icons {
+        display: flex;
+        gap: 15px;
+      }
+      
+      .social-icons a,
+      .shopping-bag a {
+        color: #333;
+        font-size: 18px;
+        transition: color 0.3s;
+      }
+      
+      .social-icons a:hover,
+      .shopping-bag a:hover {
+        color: #92774e;
+      }
+      
+      .hamburger-menu {
+        display: none;
+        cursor: pointer;
+      }
+      
+      .hamburger-menu span {
+        display: block;
+        width: 25px;
+        height: 2px;
+        background: #333;
+        margin: 5px 0;
+        transition: 0.3s;
+      }
+      
+      @media (max-width: 768px) {
+        .hamburger-menu {
+          display: block;
+        }
+        .navbar-brand {
+          width: auto;
+        }
+        .navbar-links {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          justify-content: center;
+          flex-direction: column;
+          padding: 1rem;
+          background-color: white;
+          box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.596);
+          transition: all 0.5s ease-in-out;
+          transform: translateY(-120%);
+        }
+        .navbar-links.active {
+          transform: translateY(0);
+        }
+        .navbar-links .fa-x {
+          display: block;
+        }
+        .nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: #fff;
+          padding: 20px 0;
+          display: none;
+        }
+      
+        .nav-links.active {
+          display: block;
+        }
+      
+        .navbar-items {
+          flex-direction: column;
+          align-items: center;
+          gap: 15px;
+        }
+      
+        .navbar-brand img {
+          height: 35px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .container {
+          width: 95%;
+        }
+      
+        .social-icons {
+          gap: 10px;
+        }
+      
+        .navbar-brand img {
+          height: 30px;
+        }
+      }
+      
+      /* Shopping Bag and Social Icons */
+      .shopping-bag,
+      .social-icons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      
+      .social-icons a {
+        text-decoration: none;
+        color: inherit;
+      }
+      
+      .social-icons a i,
+      .shopping-bag a i {
+        font-size: 20px;
+      }
+      
+      .shopping-bag a {
+        color: #000000;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      
+      .shopping-bag a:hover {
+        color: #ffd700;
+      }
+
+/* Categories Section */
+#categories {
+    padding: 40px 20px;
+}
+
+#categories h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.category-item {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.category-item:hover {
+    transform: scale(1.05);
+}
+
+.category-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Products Section */
+.products-list {
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+   
+}
+.products-list#tasameem-products {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    background: linear-gradient(135deg, #f5f0eb 0%, #ece5e0 100%);
+}
+
+.upload-section {
+    width: 800px;
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(161, 140, 120, 0.1);
+    padding: 40px;
+    border: 2px solid #c4a484;
+}
+
+.upload-section h2 {
+    color: #8b7355;
+    margin-bottom: 30px;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+.upload-section form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-section label {
+    width: 100%;
+    text-align: right;
+    margin: 15px 0 10px;
+    color: #967259;
+    font-weight: bold;
+}
+
+.upload-section input[type="file"] {
+    width: 100%;
+    padding: 20px;
+    border: 3px dashed #c4a484;
+    border-radius: 15px;
+    background: #f8f4f0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-section input[type="file"]:hover {
+    background: #f0e6dd;
+    border-color: #a68a64;
+}
+
+.upload-section textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #c4a484;
+    border-radius: 15px;
+    margin: 10px 0;
+    font-family: 'Cairo', sans-serif;
+    background: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.upload-section textarea:focus {
+    border-color: #8b7355;
+    outline: none;
+}
+
+.upload-section button {
+    background: linear-gradient(45deg, #c4a484 0%, #8b7355 100%);
+    color: white;
+    padding: 15px 50px;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    margin-top: 25px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.upload-section button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(139, 115, 85, 0.3);
+}
+
+
+.products-list[style*="display: block"] {
+    display: flex !important;
+}
+
+.product-item {
+    flex: 0 0 300px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.product-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+}
+
+.product-details {
+    padding: 15px;
+    text-align: center;
+}
+
+.product-details h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.product-details p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.add-to-cart {
+    background-color: #c77746;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #b4692b;
+}
+
+/* Upload Section */
+.upload-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Responsive Design */
+@media (min-width: 1200px) {
+    .product-items {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  /* للشاشات المتوسطة */
+  @media (max-width: 1199px) and (min-width: 768px) {
+    .product-items {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* للشاشات الصغيرة */
+  @media (max-width: 767px) and (min-width: 576px) {
+    .product-items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+    
+    .category-img {
+        width: 150px;
+        height: 150px;
+    }
+
+
+        </style>
+</head>
+<body id="products-page">
+    <nav class="navbar" id="mainNav">
+        <div class="container">
+          <!-- Hamburger Menu Button -->
+          <!-- <div class="hamburger-menu" >
+                  <span></span>
+                  <span></span>
+                  <span></span>
+              </div> -->
+          <i
+            class="fa-solid fa-bars fa-1x hamburger-menu"
+            onclick="toggleMenu()"
+          ></i>
+          <!-- Logo -->
+          <a class="navbar-brand" href="#page-top">
+            <img src="img/asalalogo.png" alt="brand-logo" />
+          </a>
+  
+          <div class="navbar-links">
+            <i class="fa-solid fa-x" onclick="toggleMenu()"></i>
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-items">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Products.html">Products</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="about_us.html">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="login.html">Login</a>
+                </li>
+                <!-- Shopping Bag Icon -->
+                <li class="nav-item shopping-bag">
+                  <a class="nav-link" href="#cart"
+                    ><i class="fas fa-shopping-bag"></i
+                  ></a>
+                </li>
+                <div id="cart-container" class="cart-container">
+                    <div class="cart-header">
+                      <h3>سلة التسوق</h3>
+                      <span id="cart-count">0</span>
+                    </div>
+                    <div id="cart-items" class="cart-items"></div>
+                    <div class="cart-footer">
+                      <div id="cart-total">المجموع: 0₪</div>
+                      <button onclick="checkout()" class="checkout-btn">إتمام الشراء</button>
+                    </div>
+                  </div>
+                  
+              </ul>
+            </div>
+            <div id="cart" style="display: none;">
+                <h2>عربة التسوق</h2>
+                <ul id="cart-items"></ul>
+                <div id="cart-total">المجموع: 0₪</div>
+                <button id="checkout-button" onclick="checkout()">إتمام الشراء</button>
+              </div>
+            <!-- Social Icons -->
+            <div class="social-icons">
+              <a href="https://www.facebook.com" target="_blank"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="https://www.instagram.com" target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="https://wa.me/1234567890" target="_blank"
+                ><i class="fab fa-whatsapp"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <section id="categories">
+        <h2>Shop by Category</h2>
+        <div class="categories-list">
+            <div class="category-item" onclick="toggleProducts('hooqs-products')">
+                <img src="img/اللوجو الرسمي للحلوق.jpg" alt="حلقة ساحرة / Magical Hoop" class="category-img">
+                <p>حلقة ساحرة / Magical Hoop</p>
+            </div>
+            <div class="category-item" onclick="toggleProducts('asawer-products')">
+                <img src="img/اللوجو الرسمي لسناسيل.jpg" alt="سحر السلسلة / Chain Charm" class="category-img">
+                <p> قلادة / necklace </p>
+            </div>
+            <div class="category-item" onclick="toggleProducts('tasameem-products')">
+                <img src="img/التصميم الخاص.jpg" alt="تصاميم خاصة / Custom Designs" class="category-img">
+                <p>تصاميم خاصة / Custom Designs</p>
+            </div>
+            <div class="category-item" onclick="toggleProducts('sanasel-products')">
+                <img src="img/اللوجو الرسمي للخواتم.jpg" alt="خواتم راقية / Elegant Rings" class="category-img">
+                <p>خواتم / Elegant Rings</p>
+            </div>
+            <div class="category-item" onclick="toggleProducts('necklace-products')">
+                <img src="img/اللوجو الرسمي للاساور الثانس.jpg" alt="سنسال" class="category-img">
+                <p>سحر السلسلة / Chain Charm</p>
+            </div>
+            <div class="category-item" onclick="toggleProducts('your-design-products')">
+                <img src="img/special_designaldods.png" alt="تصميم خاص" class="category-img">
+                <p>تصميم خاص / Your Design</p>
+            </div>
+        </div>
+
+
+        <!-- المنتجات الخاصة بكل فئة -->
+        <div class="products-list" id="hooqs-products">
+            <!-- إضافة المنتجات الخاصة بـ "حلقة ساحرة" -->
+            <div class="product-item">
+                <img src="img/حلوق للعرض13.jpg" alt="Product 1">
+                
+                <div class="product-details">
+                    <h3>  حلوق بوليمير</h3>
+                    <p> زيتي حلقات</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('حلوق بوليمير', 90)">إضافة  </button>
+
+                </div>
+            </div>
+                        <!-- هون بديت اضيفففففففة" -->
+
+            <div class="product-item">
+                <img src="img/حلاق.jpg" alt="Product 2">
+                <div class="product-details">
+                    <h3>  حلوق بوليمير</h3>
+                    <p> زيتي حلقات</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('حلوق بوليمير', 70)">إضافة  </button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/حلوق للعرض.jpg" alt="Product 2">
+                <div class="product-details">
+                    <h3>  حلوق بوليمير</h3>
+                    <p> ابيض طويل</p>
+
+                    <div class="price">70₪</div>
+                    <button class="add-to-cart" onclick="addToCart('حلوق بوليمير', 70)">إضافة  </button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img\حلوق للعرض10jpg.jpg" alt="Product 2">
+                <div class="product-details">
+                    <h3> حلق ستنانلس  </h3>
+                    <p>تصميم مميز</p>
+                    <div class="price">70₪</div>
+                    <button class="add-to-cart" onclick="addToCart('حلق ستانلس', 70)">إضافة  </button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/حلوق لللعرض1.jpg" alt="Product 2">
+                <div class="product-details">
+                    <h3>  حلق مربل مميز</h3>
+                    <p>الوان دافئة </p>
+
+                    <div class="price">70₪</div>
+                    <button class="add-to-cart" onclick="addToCart('حلق مربل مميز', 70)">إضافة  </button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/حلوق للعرض 15.jpg" alt="Product 2">
+                <div class="product-details">
+                    <h3>  حلق  ايبوكسي</h3>
+                    <p> حلقات عشوائية</p>
+                    <div class="price">70₪</div>
+                    <button class="add-to-cart" onclick="addToCart('حلق ايبوكسي', 70)">إضافة  </button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/حلوق للعرض11.jpg" alt="Product 2">
+                <div class="product-details">
+                    <h3>حلقة ساحرة </h3>
+                    <p> الوان صيفية</p>
+                    <div class="price">70₪</div>
+                    <button class="add-to-cart" onclick="addToCart('حلقة ساحرة ', 70)">إضافة  </button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/حلوق للعرض12.jpg" alt="Product 2">
+                <div class="product-details">
+                    <h3>حلق دائري مفرغ</h3>
+                    <p>متعرج ابيض</p>
+                    <div class="price">60₪</div>
+                    <button class="add-to-cart" onclick="addToCart('حلق دائري مفرغ ', 60)">إضافة  </button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/حلوق للعرض 14.jpg" alt="Product 2">
+                <div class="product-details">
+                    <h3>حلق صيفي</h3>
+                    <p>الوان صيفيه</p>
+                    <div class="price">70₪</div>
+                    <button class="add-to-cart" onclick="addToCart('حلق صيفي', 70)">إضافة  </button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/حلوق للعرض16.jpg" alt="Product 2">
+                <div class="product-details">
+                    <h3>حلق صغير ايبوكسي</h3>
+                    <p>وردة صغيرة</p>
+                    <div class="price">70₪</div>
+                    <button class="add-to-cart" onclick="addToCart('حلق صغير ايبوكسي', 70)">إضافة  </button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/حلوق للعرض17.jpg " alt="Product 2">
+                <div class="product-details">
+                    <h3>حلق لونين</h3>
+                    <p> دمج الاللوان</p>
+                    <div class="price">70₪ </div>
+                    <button class="add-to-cart" onclick="addToCart('حلق لونين', 70)">إضافة  </button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/حلوق للعرض18.jpg" alt="Product 2">
+                <div class="product-details">
+                    <h3>  تصميم بيضاوي</h3>
+                    <p>تفاصيل جميلة</p>
+                    <div class="price">70₪</div>
+                    <button class="add-to-cart" onclick="addToCart('تصميم بيضاوي ', 70)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/حلوق للعرض 19.jpg" alt="Product 2">
+                <div class="product-details">
+                    <h3>مجموعه من الحلقات</h3>
+                    <p>الوان شتوية</p>
+                    <div class="price">150₪</div>
+                    <button class="add-to-cart" onclick="addToCart('مجموعة من الحلقات ', 150)">إضافة </button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/حلوق للعرض 20.jpg " alt="Product 2">
+                <div class="product-details">
+                    <h3>مجموعه من الحلقات</h3>
+                    <p>حلقات مموجة</p>
+                    <div class="price">140₪</div>
+                    <button class="add-to-cart" onclick="addToCart('مجموعة من الحلقات ', 140)"> +</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/حلوق للعرض 21.jpg " alt="Product 2">
+                <div class="product-details">
+                    <h3> احلاق مدورة</h3>
+                    <p>تحتوي على تفاصيل  </p>
+                    <div class="price">80₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' احلاق مدورة ', 80)"> +</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/حلوق للعرض22.jpg" alt="Product 2">
+                <div class="product-details">
+                    <h3> حلق الاقواس</h3>
+                    <p> مع احجار اللولو</p>
+                    <div class="price">₪50</div>
+                    <button class="add-to-cart" onclick="addToCart(' حلق الاقواس  ', 50)"> +</button>
+
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="products-list" id="asawer-products">
+            <!-- إضافة المنتجات الخاصة بـ "سحر السلسلة" -->
+           
+            <div class="product-item">
+                <img src="img/سناسيل للعرض5.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>سنسال لولو </h3>
+                    <p>مصنوع من لؤلؤ البحر </p>
+                    <div class="price">200₪ </div>
+                    <button class="add-to-cart" onclick="addToCart('سنسال لولو ', 200)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسيل للعرض6.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>سناسل ملفوفة-</h3>
+                    <p>منظر جذاب</p>
+                    <div class="price">170₪</div>
+                    <button class="add-to-cart" onclick="addToCart('سناسيل ملفوفة-', 170)">إضافة</button>
+
+                      
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسيل للعض7.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>سنسال باحجار </h3>
+                    <p>احجار ملوكية</p>
+                    <div class="price">100₪</div>
+                    <button class="add-to-cart" onclick="addToCart('سنسال باحجار -', 100)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسيل للعرض8.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>  السلسلة الارجوانيه</h3>
+                    <p>كامل بالاحجار</p>
+                    <div class="price">120₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' السلسلة الارجوانيه', 120)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض9.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3> السلسلة الذهبية</h3>
+                    <p> سنسال عصري </p>
+                    <div class="price">200₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' السلسلة الذهبية', 200)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض10.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>سحر السلسلة </h3>
+                    <p>سنسال بلونين</p>
+                    <div class="price">250₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' سحر السلسلة ', 250)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض11.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>  ايبوكسي</h3>
+                    <p>وردة زرقاء</p>
+                    <div class="price">60₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' ايبوكسي ', 60)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض12.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>ايبوكسي</h3>
+                    <p>خلفية بيضاء</p>
+                    <div class="price">70₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' ايبوكسي ', 70)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض13.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>ايبوكسي</h3>
+                    <p> وردة حمراء</p>
+                    <div class="price">70₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' ايبوكسي ', 70)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض14.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>ايبوكسي</h3>
+                    <p> خلفية شفاف</p>
+                    <div class="price">80₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' ايبوكسي ', 80)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض15.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>ايبوكسي</h3>
+                    <p>  خلفية شفاف ورد احمر</p>
+                    <div class="price">80₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' ايبوكسي ', 80)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض16.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>ايبوكسي</h3>
+                    <p>  خلفية شفاف ورد اصفر</p>
+                    <div class="price">80₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' ايبوكسي ', 80)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض17.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>ايبوكسي</h3>
+                    <p>  خلفية بيضاء ورد بنفسجي</p>
+                    <div class="price">80₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' ايبوكسي ', 80)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض18.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>ايبوكسي</h3>
+                    <p>  خلفية سوداء ورد بنفسجي</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' ايبوكسي ', 90)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض19.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>ايبوكسي</h3>
+                    <p>    ورد الفل</p>
+                    <div class="price">75₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' ايبوكسي ', 75)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض20.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>ايبوكسي</h3>
+                    <p> خلفية خضراء ورد الفل</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' ايبوكسي ', 90)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض21.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>ايبوكسي</h3>
+                    <p> سنسال برونزي</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' ايبوكسي ', 90)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض22.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>سحر السلسلة - منتج 1</h3>
+                    <p>وصف المنتج: سلسلة ساحرة بتصميم جذاب.</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' سحر السلسلة - منتج 1 ', 90)">إضافة</button>
+
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/سناسل للعرض23.jpg" alt="Product 3">
+                <div class="product-details">
+                    <h3>سحر السلسلة - منتج 1</h3>
+                    <p>وصف المنتج: سلسلة ساحرة بتصميم جذاب.</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart(' سحر السلسلة - منتج 1 ', 90)">إضافة</button>
+
+                </div>
+            </div>
+        </div>
+<!--هون السيكشننننن-->
+        <div class="products-list" id="tasameem-products">
+            <div class="upload-section">
+                <h2 style="text-align: center; font-family: 'Cairo', sans-serif;">ارفع تصميمك الخاص</h2>
+                <form action="" method="POST" enctype="multipart/form-data" style="text-align: center; margin-top: 20px;">
+                    <label for="design-upload" style="font-family: 'Cairo', sans-serif; font-size: 16px; margin-bottom: 10px; display: block;">اختر ملف التصميم الخاص بك:</label>
+                    <input type="file" class="design-image" name="design-upload" accept="image/*" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+                    
+                    <label for="design-name" style="font-family: 'Cairo', sans-serif; font-size: 16px; margin-bottom: 10px; display: block;">أسم الموتنج:</label>
+                    <textarea class="design-name" name="designName" rows="4" placeholder="اكتب اسم الموتنج هنا..." style="width: 80%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; resize: none;" required></textarea>
+        
+                    <label for="design-details" style="font-family: 'Cairo', sans-serif; font-size: 16px; margin-bottom: 10px; display: block;">أضف توصياتك:</label>
+                    <textarea class="design-details" name="designDetails" rows="4" placeholder="اكتب توصياتك أو تفاصيلك هنا..." style="width: 80%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; resize: none;" required></textarea>
+        
+                    <button class="design-form" type="submit" style="margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; font-family: 'Cairo', sans-serif;">إرسال</button>
+                </form>
+            </div>
+        </div>
+        
+
+        <div class="products-list" id="sanasel-products">
+            <!-- إضافة المنتجات الخاصة بـ "خواتم" -->
+            <div class="product-item">
+                <img src="img/خواتم للعرض5.jpg " alt=" خواتم">
+                <div class="product-details">
+                    <h3>خواتم حيوية</h3>
+                    <p>روزي</p>
+                    <div class="price">50₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+                <div class="product-item">
+                    <img src="img/خاتم للعرض.jpg " alt=" خواتم">
+                    <div class="product-details">
+                        <h3>خواتم اصالة</h3>
+                        <p>palestine</p>
+                        <div class="price">50₪</div>
+                        <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                    </div>
+                </div>
+                    <div class="product-item">
+                        <img src="img/خواتم للعرض6.jpg " alt=" خواتم">
+                        <div class="product-details">
+                            <h3>خواتم حيوية</h3>
+                            <p>روزي</p>
+                            <div class="price">50₪</div>
+                            <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                        </div>
+                    </div>
+                        <div class="product-item">
+                            <img src="img/خواتم للعرض7.jpg " alt=" خواتم">
+                            <div class="product-details">
+                                <h3>خواتم حيوية</h3>
+                                <p>روزي</p>
+                                <div class="price">50₪</div>
+                                <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                            </div>
+                        </div>
+                            <div class="product-item">
+                                <img src="img/خواتم للعرض8.jpg " alt=" خواتم">
+                                <div class="product-details">
+                                    <h3>خواتم حيوية</h3>
+                                    <p>روزي</p>
+                                    <div class="price">50₪</div>
+                                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                </div>
+                            </div>
+                                <div class="product-item">
+                                    <img src="img/خواتم للعرض9.jpg " alt=" خواتم">
+                                    <div class="product-details">
+                                        <h3>خواتم حيوية</h3>
+                                        <p>روزي</p>
+                                        <div class="price">50₪</div>
+                                        <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                    </div>
+                                </div>
+                                    <div class="product-item">
+                                        <img src="img/خواتم للعرض10.jpg " alt=" خواتم">
+                                        <div class="product-details">
+                                            <h3>خواتم اصالة</h3>
+                                            <p>روزي</p>
+                                            <div class="price">50₪</div>
+                                            <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                        </div>
+                                    </div>
+                                        <div class="product-item">
+                                            <img src="img/خواتم للعرض11.jpg " alt=" خواتم">
+                                            <div class="product-details">
+                                                <h3>خواتم حيوية</h3>
+                                                <p>روزي</p>
+                                                <div class="price">50₪</div>
+                                                <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                            </div>
+                                        </div>
+                                            <div class="product-item">
+                                                <img src="img/خواتم للعرض12.jpg " alt=" خواتم">
+                                                <div class="product-details">
+                                                    <h3>خواتم حيوية</h3>
+                                                    <p>روزي</p>
+                                                    <div class="price">50₪</div>
+                                                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                                </div>
+                                            </div>
+                                            <div class="product-item">
+                                                <img src="img/خواتم للعرض13.jpg " alt=" خواتم">
+                                                <div class="product-details">
+                                                    <h3>خواتم اصالة</h3>
+                                                    <p>روزي</p>
+                                                    <div class="price">50₪</div>
+                                                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                                </div>
+                                            </div>
+                                            <div class="product-item">
+                                                <img src="img/خواتم للعرض14.jpg " alt=" خواتم">
+                                                <div class="product-details">
+                                                    <h3>خواتم اصالة</h3>
+                                                    <p>روزي</p>
+                                                    <div class="price">50₪</div>
+                                                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                                </div>
+                                            </div>
+                                            <div class="product-item">
+                                                <img src="img/خواتم للعرض15.jpg " alt=" خواتم">
+                                                <div class="product-details">
+                                                    <h3>خواتم اصالة</h3>
+                                                    <p>روزي</p>
+                                                    <div class="price">50₪</div>
+                                                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                                </div>
+                                            </div>
+                                            <div class="product-item">
+                                                <img src="img/خواتم للعرض16.jpg " alt=" خواتم">
+                                                <div class="product-details">
+                                                    <h3>خواتم اصالة</h3>
+                                                    <p>روزي</p>
+                                                    <div class="price">50₪</div>
+                                                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                                </div>
+                                            </div>
+                                            <div class="product-item">
+                                                <img src="img/خواتم للعرض17.jpg " alt=" خواتم">
+                                                <div class="product-details">
+                                                    <h3>خواتم اصالة</h3>
+                                                    <p>روزي</p>
+                                                    <div class="price">50₪</div>
+                                                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                                </div>
+                                            </div>
+                                            <div class="product-item">
+                                                <img src="img/خواتم للعرض18.jpg " alt=" خواتم">
+                                                <div class="product-details">
+                                                    <h3>خواتم اصالة</h3>
+                                                    <p>روزي</p>
+                                                    <div class="price">50₪</div>
+                                                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                                </div>
+                                            </div>
+                                            <div class="product-item">
+                                                <img src="img/خواتم للعرض19.jpg " alt=" خواتم">
+                                                <div class="product-details">
+                                                    <h3>خواتم اصالة</h3>
+                                                    <p>روزي</p>
+                                                    <div class="price">50₪</div>
+                                                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                                </div>
+                                            </div>
+                                            <div class="product-item">
+                                                <img src="img/خواتم للعرض20.jpg " alt=" خواتم">
+                                                <div class="product-details">
+                                                    <h3>خواتم اصالة</h3>
+                                                    <p>روزي</p>
+                                                    <div class="price">50₪</div>
+                                                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                                </div>
+                                            </div>
+                                            <div class="product-item">
+                                                <img src="img/خواتم للعرض10.jpg " alt=" خواتم">
+                                                <div class="product-details">
+                                                    <h3>خواتم اصالة</h3>
+                                                    <p>روزي</p>
+                                                    <div class="price">50₪</div>
+                                                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                                                </div>
+                                            </div>
+
+            </div>                     
+        <div class="products-list" id="necklace-products">
+            <!-- إضافة المنتجات الخاصة بـ "اسور ملاحظة انا مبدلة" -->
+            <div class="product-item">
+                <img src="img/اساور للعرض5.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اساور للعرض6.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض10.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوارللعرض11.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض12.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض13.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض14.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض15.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض16.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض17.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض18.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض19.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض20.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض21.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض22.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض23.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض24.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/اسوار للعرض25.jpg " alt=" اساور">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="products-list" id="your-design-products">
+            <!-- إضافة المنتجات الخاصة بـ "تصميم خاص" -->
+            <div class="product-item">
+                <img src="img/تصاميم خاصة.jpg" alt="تصميم خاص 5">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/تصاميم خاصة5.jpg" alt="تصميم خاص 5">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+        
+            <div class="product-item">
+                <img src="img/تصاميم خاصة16.webp" alt="تصميم خاص 5">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+        
+            <div class="product-item">
+                <img src="img/تصاميم خاصة6.jpg" alt="تصميم خاص 3">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+        
+            <div class="product-item">
+                <img src="img/تصاميم خاصة7.jpg" alt="تصميم خاص 4">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+        
+            <div class="product-item">
+                <img src="img/تصاميم خاصة8.jpg" alt="تصميم خاص 5">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/تصاميم خاصة9.jpg" alt="تصميم خاص 5">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/تصاميم خاصة10.jpg" alt="تصميم خاص 5">
+                <div class="product-details">
+                    <h3>free palestine</h3>
+                    <p>palestine</p>
+                    <div class="price">90₪</div>
+                    <button class="add-to-cart" onclick="addToCart('free palestine', 90)">إضافة</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleProducts(categoryId) {
+            let allProducts = document.querySelectorAll('.products-list');
+            allProducts.forEach(list => list.style.display = 'none');
+            
+            let selectedProducts = document.getElementById(categoryId);
+            selectedProducts.style.display = 'flex';
+        }
+        
+    </script>
+    <script src="script/products.js"></script>
+    <script>
+        // تعريف مصفوفة لتخزين المنتجات المضافة إلى السلة
+        let cart = [];
+
+        function addToCart(name, price) {
+            cart.push({
+                name: name,
+                price: price
+            });
+            
+            updateCartDisplay();
+            showCartNotification();
+        }
+        
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+            
+            // Update cart count
+            cartCount.textContent = cart.length;
+            
+            // Clear current cart display
+            cartItems.innerHTML = '';
+            
+            // Calculate total
+            let total = 0;
+            
+            // Add each item to cart display
+            cart.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <span>${item.name}</span>
+                    <span>${item.price}₪</span>
+                    <button onclick="removeFromCart(${index})">×</button>
+                `;
+                cartItems.appendChild(itemElement);
+                total += item.price;
+            });
+            
+            // Update total display
+            cartTotal.textContent = `المجموع: ${total}₪`;
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+        
+        function showCartNotification() {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'cart-notification';
+            notification.textContent = 'تمت إضافة المنتج إلى السلة';
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 2 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+        
+        function checkout() {
+            if (cart.length === 0) {
+                alert('السلة فارغة');
+                return;
+            }
+            
+            // Add checkout logic here
+            alert('تم إتمام الطلب بنجاح!');
+            cart = [];
+            updateCartDisplay();
+        }
+        
+        </script>
+        <script>document.querySelector('.shopping-bag').addEventListener('click', (e) => {
+            e.preventDefault();
+            const cart = document.getElementById('cart-container');
+            cart.style.display = cart.style.display === 'block' ? 'none' : 'block';
+        });
+        </script>
+        
+    
+</body>
+</html>
