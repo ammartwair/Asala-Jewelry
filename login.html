@@ -1,244 +1,271 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>تسجيل الدخول - Asala</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Cairo", sans-serif;
+      }
 
-        body {
-            background-color: #f5f5f5;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+      body {
+        background-color: #f5f5f5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
 
-        .login-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            margin-top: 80px;
-        }
+      .login-container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        margin-top: 80px;
+      }
 
+      .login-box {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .login-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .login-logo {
+        width: 120px;
+        margin-bottom: 20px;
+      }
+
+      .login-header h2 {
+        color: #92774e;
+        font-size: 24px;
+      }
+
+      .input-group {
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      .input-group i {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #92774e;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 12px 45px 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+
+      .input-group input:focus {
+        border-color: #92774e;
+        outline: none;
+      }
+
+      .form-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .forgot-password {
+        color: #92774e;
+        text-decoration: none;
+      }
+
+      .login-btn {
+        width: 100%;
+        padding: 12px;
+        background: #92774e;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .login-btn:hover {
+        background: #7c6341;
+      }
+
+      .social-login {
+        text-align: center;
+        margin-top: 25px;
+      }
+
+      .register-link {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .register-link a {
+        color: #92774e;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      @media (max-width: 480px) {
         .login-box {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            padding: 40px;
-            width: 100%;
-            max-width: 400px;
+          padding: 20px;
         }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .login-logo {
-            width: 120px;
-            margin-bottom: 20px;
-        }
-
-        .login-header h2 {
-            color: #92774e;
-            font-size: 24px;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .input-group i {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #92774e;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 12px 45px 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        .input-group input:focus {
-            border-color: #92774e;
-            outline: none;
-        }
-
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .forgot-password {
-            color: #92774e;
-            text-decoration: none;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 12px;
-            background: #92774e;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .login-btn:hover {
-            background: #7c6341;
-        }
-
-        .social-login {
-            text-align: center;
-            margin-top: 25px;
-        }
-
-        .register-link {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .register-link a {
-            color: #92774e;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        @media (max-width: 480px) {
-            .login-box {
-                padding: 20px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="login-container">
-        <div class="login-box">
-            <div class="login-header">
-                <img src="img/asalalogo.png" alt="Asala Logo" class="login-logo">
-                <h2>مرحباً بعودتك</h2>
-            </div>
-            
-            <form class="login-form">
-                <div class="input-group">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-                </div>
-                
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="password" placeholder="كلمة المرور" required>
-                </div>
-                
-                <div class="form-options">
-                    <label class="remember-me">
-                        <input type="checkbox">
-                        <span>تذكرني</span>
-                    </label>
-                    <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
-                </div>
-                
-                <button type="submit" class="login-btn">تسجيل الدخول</button>
-                
-                <div class="social-login">
-                    <p>أو سجل الدخول عبر</p>
-                    <div class="social-buttons">
-                        <button type="button" class="google-btn">
-                            <i class="fab fa-google"></i> Google
-                        </button>
-                        <button type="button" class="facebook-btn">
-                            <i class="fab fa-facebook-f"></i> Facebook
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="register-link">
-                    <p>ليس لديك حساب؟ <a href="register.html">سجل الآن</a></p>
-                </div>
-            </form>
+      <div class="login-box">
+        <div class="login-header">
+          <img src="img/asalalogo.png" alt="Asala Logo" class="login-logo" />
+          <h2>مرحباً بعودتك</h2>
         </div>
+
+        <form class="login-form">
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input
+              type="email"
+              id="email"
+              placeholder="البريد الإلكتروني"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              id="password"
+              placeholder="كلمة المرور"
+              required
+            />
+          </div>
+
+          <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox" />
+              <span>تذكرني</span>
+            </label>
+            <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+          </div>
+
+          <button type="submit" class="login-btn">تسجيل الدخول</button>
+
+          <div class="social-login">
+            <p>أو سجل الدخول عبر</p>
+            <div class="social-buttons">
+              <button type="button" class="google-btn">
+                <i class="fab fa-google"></i> Google
+              </button>
+              <button type="button" class="facebook-btn">
+                <i class="fab fa-facebook-f"></i> Facebook
+              </button>
+            </div>
+          </div>
+
+          <div class="register-link">
+            <p>ليس لديك حساب؟ <a href="register.html">سجل الآن</a></p>
+          </div>
+        </form>
+      </div>
     </div>
 
     <script>
-        document.querySelector('.login-form').addEventListener('submit', async function(e) {
-            e.preventDefault(); // Prevent the default form submission behavior
-    
-            // Get email and password from the form inputs
-            const email = document.querySelector('input[type="email"]').value.trim();
-            const password = document.querySelector('input[type="password"]').value.trim();
-    
-            if (!email || !password) {
-                alert("يرجى إدخال البريد الإلكتروني وكلمة المرور.");
-                return;
-            }
-    
-            try {
-                // Send a POST request to the API
-                const response = await fetch('http://localhost:3000/api/auth/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email, password }),
-                });
-    
-                const data = await response.json();
-    
-                if (response.ok) {
-                    // Handle successful login (e.g., redirect or show success message)
-                    console.log('تم تسجيل الدخول بنجاح:', data);
-                    alert("تم تسجيل الدخول بنجاح!");
-                    // Example redirect to a index page
-                    window.location.href = 'index.html';
+      document
+        .querySelector(".login-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault(); // Prevent the default form submission behavior
+
+          // Get email and password from the form inputs
+          const email = document
+            .querySelector('input[type="email"]')
+            .value.trim();
+          const password = document
+            .querySelector('input[type="password"]')
+            .value.trim();
+
+          if (!email || !password) {
+            alert("يرجى إدخال البريد الإلكتروني وكلمة المرور.");
+            return;
+          }
+
+          try {
+            // Send a POST request to the API
+            const response = await fetch(
+              "http://localhost:3000/api/auth/login",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+              }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+              if (data.token) {
+                const payload = JSON.parse(atob(data.token.split(".")[1])); // Decode the JWT payload
+                sessionStorage.setItem("authToken", data.token);
+                if (payload.role === "Admin") {
+                  alert("مرحباً بك، مشرف النظام!");
+                  window.location.href = "ADMIN.html"; // Redirect to admin page
                 } else {
-                    // Handle login failure (e.g., show error message)
-                    console.error('خطأ أثناء تسجيل الدخول:', data);
-                    alert(data.message || "فشل تسجيل الدخول. يرجى التحقق من بياناتك.");
+                  alert("تم تسجيل الدخول بنجاح!");
+                  window.location.href = "index.html"; // Redirect to index page
                 }
-            } catch (error) {
-                console.error('حدث خطأ أثناء تسجيل الدخول:', error);
-                alert("حدث خطأ أثناء الاتصال بالخادم. يرجى المحاولة لاحقًا.");
+              }
+            } else {
+              // Handle login failure (e.g., show error message)
+              console.error("خطأ أثناء تسجيل الدخول:", data);
+              alert(data.msg || "فشل تسجيل الدخول. يرجى التحقق من بياناتك.");
             }
+          } catch (error) {
+            console.error("حدث خطأ أثناء تسجيل الدخول:", error);
+            alert("حدث خطأ أثناء الاتصال بالخادم. يرجى المحاولة لاحقًا.");
+          }
         });
-    
-        // Button effect
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(button => {
-            button.addEventListener('mousedown', function() {
-                this.style.transform = 'scale(0.98)';
-            });
-            button.addEventListener('mouseup', function() {
-                this.style.transform = 'scale(1)';
-            });
+
+      // Button effect
+      const buttons = document.querySelectorAll("button");
+      buttons.forEach((button) => {
+        button.addEventListener("mousedown", function () {
+          this.style.transform = "scale(0.98)";
         });
+        button.addEventListener("mouseup", function () {
+          this.style.transform = "scale(1)";
+        });
+      });
     </script>
-    
-</body>
+  </body>
 </html>

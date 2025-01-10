@@ -47,16 +47,18 @@
               <li class="nav-item">
                 <a class="nav-link" href="login.html">Login</a>
               </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" id="logout" style="display: none">Logout</a>
+              </li>
               <!-- Shopping Bag Icon -->
               <li class="nav-item shopping-bag">
                 <a class="nav-link" href="cart.html"
                   ><i class="fas fa-shopping-bag"></i
                 ></a>
               </li>
- 
             </ul>
           </div>
-         
+
           <!-- Social Icons -->
           <div class="social-icons">
             <a href="https://www.facebook.com" target="_blank"
@@ -244,13 +246,12 @@
         </div>
       </div>
     </section>
-    <div id="cart" style="display: none;">
-  <h2>عربة التسوق</h2>
-  <ul id="cart-items"></ul>
-  <div id="cart-total">المجموع: 0₪</div>
-  <button id="checkout-button" onclick="checkout()">إتمام الشراء</button>
-</div>
-
+    <div id="cart" style="display: none">
+      <h2>عربة التسوق</h2>
+      <ul id="cart-items"></ul>
+      <div id="cart-total">المجموع: 0₪</div>
+      <button id="checkout-button" onclick="checkout()">إتمام الشراء</button>
+    </div>
 
     <!-- Contact Info Section -->
     <section class="contact-info">
@@ -265,15 +266,43 @@
         var menu = document.querySelector(".navbar-links");
         menu.classList.toggle("active");
       }
+      document.addEventListener("DOMContentLoaded", function () {
+        const authToken = sessionStorage.getItem("authToken"); // Retrieve the token from sessionStorage
+        const loginLink = document.querySelector(
+          ".nav-link[href='login.html']"
+        ); // Login link
+        const logoutButton = document.getElementById("logout"); // Logout button
+
+        // Show/hide buttons based on authToken
+        if (authToken) {
+          // User is logged in
+          if (loginLink) loginLink.style.display = "none"; // Hide login link
+          if (logoutButton) logoutButton.style.display = "inline-block"; // Show logout button
+        } else {
+          // User is not logged in
+          if (loginLink) loginLink.style.display = "inline-block"; // Show login link
+          if (logoutButton) logoutButton.style.display = "none"; // Hide logout button
+        }
+
+        // Add logout functionality
+        if (logoutButton) {
+          logoutButton.addEventListener("click", function () {
+            sessionStorage.removeItem("authToken"); // Remove token from sessionStorage
+            alert("You have been logged out.");
+            window.location.reload(); // Refresh the page to update the UI
+          });
+        }
+      });
     </script>
     <script src="script/products.js"></script>
-    <script>// مثال لإضافة عنصر إلى السلة
+    <script>
+      // مثال لإضافة عنصر إلى السلة
       function addToCart(name, price) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
         cart.push({ name, price });
-        localStorage.setItem('cart', JSON.stringify(cart));
+        localStorage.setItem("cart", JSON.stringify(cart));
         alert(`${name} تمت إضافته إلى السلة!`);
       }
-      </script>
+    </script>
   </body>
 </html>

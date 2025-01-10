@@ -55,4 +55,3 @@ const start = async () => {
         myDesigns.appendChild(designDiv);
     }
 }
-start();

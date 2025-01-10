@@ -1,467 +1,422 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>لوحة التحكم | متجر المجوهرات</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
     <style>
-        /* الألوان الرئيسية */
-        :root {
-            --primary: #8B4513;
-            --secondary: #D2691E;
-            --accent: #DEB887;
-            --background: #FFF8DC;
-            --text: #333;
-            --success: #28a745;
-            --danger: #dc3545;
-        }
+      /* الألوان الرئيسية */
+      :root {
+        --primary: #8b4513;
+        --secondary: #d2691e;
+        --accent: #deb887;
+        --background: #fff8dc;
+        --text: #333;
+        --success: #28a745;
+        --danger: #dc3545;
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Cairo", sans-serif;
+      }
 
-        body {
-            background: var(--background);
-        }
+      body {
+        background: var(--background);
+      }
 
-        .admin-container {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            min-height: 100vh;
-        }
+      .admin-container {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        min-height: 100vh;
+      }
 
-        /* Sidebar Styling */
-        .sidebar {
-            background: var(--primary);
-            color: white;
-            padding: 1rem;
-        }
+      /* Sidebar Styling */
+      .sidebar {
+        background: var(--primary);
+        color: white;
+        padding: 1rem;
+      }
 
-        .sidebar-header {
-            padding: 1rem;
-            text-align: center;
-            border-bottom: 1px solid var(--accent);
-        }
+      .sidebar-header {
+        padding: 1rem;
+        text-align: center;
+        border-bottom: 1px solid var(--accent);
+      }
 
-        .nav-menu {
-            list-style: none;
-            padding: 1rem 0;
-        }
+      .nav-menu {
+        list-style: none;
+        padding: 1rem 0;
+      }
 
-        .nav-item {
-            padding: 0.8rem 1rem;
-            margin: 0.5rem 0;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+      .nav-item {
+        padding: 0.8rem 1rem;
+        margin: 0.5rem 0;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
 
-        .nav-item:hover {
-            background: var(--secondary);
-        }
+      .nav-item:hover {
+        background: var(--secondary);
+      }
 
-        /* Main Content Styling */
-        .main-content {
-            padding: 2rem;
-        }
+      /* Main Content Styling */
+      .main-content {
+        padding: 2rem;
+      }
 
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
 
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
+      /* Stats Cards */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
 
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
+      .stat-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
 
-        /* Products Table */
-        .products-table {
-            width: 100%;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+      /* Products Table */
+      .products-table {
+        width: 100%;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
 
-        .products-table th,
-        .products-table td {
-            padding: 1rem;
-            text-align: right;
-        }
+      .products-table th,
+      .products-table td {
+        padding: 1rem;
+        text-align: right;
+      }
 
-        .products-table th {
-            background: var(--primary);
-            color: white;
-        }
+      .products-table th {
+        background: var(--primary);
+        color: white;
+      }
 
-        .products-table tr:nth-child(even) {
-            background: #f9f9f9;
-        }
+      .products-table tr:nth-child(even) {
+        background: #f9f9f9;
+      }
 
-        /* Action Buttons */
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
+      /* Action Buttons */
+      .btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: opacity 0.3s;
+      }
 
-        .btn:hover {
-            opacity: 0.9;
-        }
+      .btn:hover {
+        opacity: 0.9;
+      }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
 
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
+      .btn-success {
+        background: var(--success);
+        color: white;
+      }
 
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
+      .btn-danger {
+        background: var(--danger);
+        color: white;
+      }
 
-        /* Modal Styling */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-        }
+      /* Modal Styling */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+      }
 
-        .modal-content {
-            background: white;
-            width: 90%;
-            max-width: 500px;
-            margin: 2rem auto;
-            padding: 2rem;
-            border-radius: 10px;
-        }
+      .modal-content {
+        background: white;
+        width: 90%;
+        max-width: 500px;
+        margin: 2rem auto;
+        padding: 2rem;
+        border-radius: 10px;
+      }
 
-        .form-group {
-            margin-bottom: 1rem;
-        }
+      .form-group {
+        margin-bottom: 1rem;
+      }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="admin-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2><i class="fas fa-gem"></i> لوحة التحكم</h2>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item" onclick="showSection('dashboard')">
-                    <i class="fas fa-home"></i> الرئيسية
-                </li>
-                <li class="nav-item" onclick="showSection('products')">
-                    <i class="fas fa-box"></i> المنتجات
-                </li>
-                <li class="nav-item" onclick="showSection('categories')">
-                    <i class="fas fa-tags"></i> الفئات
-                </li>
-                <li class="nav-item" onclick="showSection('orders')">
-                    <i class="fas fa-shopping-cart"></i> الطلبات
-                </li>
-                <li class="nav-item" onclick="showSection('customers')">
-                    <i class="fas fa-users"></i> العملاء
-                </li>
-            </ul>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="dashboard-header">
-                <h1>لوحة التحكم</h1>
-                <button class="btn btn-primary" onclick="showAddProductModal()">
-                    <i class="fas fa-plus"></i> إضافة منتج جديد
-                </button>
-            </div>
-
-            <!-- Stats Cards -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <i class="fas fa-box fa-2x"></i>
-                    <h3>إجمالي المنتجات</h3>
-                    <p>150</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-shopping-cart fa-2x"></i>
-                    <h3>الطلبات اليوم</h3>
-                    <p>24</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-users fa-2x"></i>
-                    <h3>العملاء النشطين</h3>
-                    <p>1,250</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-shekel-sign fa-2x"></i>
-                    <h3>إجمالي المبيعات</h3>
-                    <p>₪15,000</p>
-                </div>
-            </div>
-
-            <!-- Products Table -->
-            <table class="products-table">
-                <thead>
-                    <tr>
-                        <th>المنتج</th>
-                        <th>الفئة</th>
-                        <th>السعر</th>
-                        <th>المخزون</th>
-                        <th>الحالة</th>
-                        <th>الإجراءات</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dynamic Product Rows -->
-                </tbody>
-            </table>
-        </main>
-    </div>
-
-    <!-- Add Product Modal -->
-    <div id="addProductModal" class="modal">
-        <div class="modal-content">
-            <h2>إضافة منتج جديد</h2>
-            <form id="addProductForm">
-                <div class="form-group">
-                    <label>اسم المنتج</label>
-                    <input type="text" name="productName" required>
-                </div>
-                <div class="form-group">
-                    <label>الفئة</label>
-                    <select name="category" required>
-                        <option value="hooqs">حلقات</option>
-                        <option value="sanasel">سناسل</option>
-                        <option value="asawer">أساور</option>
-                        <option value="khawatem">خواتم</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>السعر</label>
-                    <input type="number" name="price" required>
-                </div>
-                <div class="form-group">
-                    <label>الوصف</label>
-                    <textarea name="description" rows="4"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>صورة المنتج</label>
-                    <input type="file" name="image" accept="image/*">
-                </div>
-                <button type="submit" class="btn btn-primary">حفظ المنتج</button>
-            </form>
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2><i class="fas fa-gem"></i> لوحة التحكم</h2>
         </div>
+        <ul class="nav-menu">
+          <li class="nav-item" onclick="showSection('dashboard')">
+            <i class="fas fa-home"></i> الرئيسية
+          </li>
+          <li class="nav-item" onclick="showSection('products')">
+            <i class="fas fa-box"></i> المنتجات
+          </li>
+          <li class="nav-item" onclick="showSection('categories')">
+            <i class="fas fa-tags"></i> الفئات
+          </li>
+          <li class="nav-item" onclick="showSection('orders')">
+            <i class="fas fa-shopping-cart"></i> الطلبات
+          </li>
+          <li class="nav-item" onclick="showSection('customers')">
+            <i class="fas fa-users"></i> العملاء
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="dashboard-header">
+          <h1>لوحة التحكم</h1>
+          <button class="btn btn-primary" onclick="showAddProductModal()">
+            <i class="fas fa-plus"></i> إضافة منتج جديد
+          </button>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <i class="fas fa-box fa-2x"></i>
+            <h3>إجمالي المنتجات</h3>
+            <p>150</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-shopping-cart fa-2x"></i>
+            <h3>الطلبات اليوم</h3>
+            <p>24</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-users fa-2x"></i>
+            <h3>العملاء النشطين</h3>
+            <p>1,250</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-shekel-sign fa-2x"></i>
+            <h3>إجمالي المبيعات</h3>
+            <p>₪15,000</p>
+          </div>
+        </div>
+
+        <!-- Products Table -->
+        <table class="products-table">
+          <thead>
+            <tr>
+              <th>المنتج</th>
+              <th>الفئة</th>
+              <th>السعر</th>
+              <th>المخزون</th>
+              <th>الحالة</th>
+              <th>الإجراءات</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Dynamic Product Rows -->
+          </tbody>
+        </table>
+      </main>
     </div>
 
     <!-- نموذج إضافة المنتج في admin.html -->
-<div id="addProductModal" class="modal">
-    <div class="modal-content">
+    <div id="addProductModal" class="modal">
+      <div class="modal-content">
         <h2>إضافة منتج جديد</h2>
         <form id="addProductForm">
-            <div class="form-group">
-                <label>اسم المنتج</label>
-                <input type="text" name="name" required>
-            </div>
-            <div class="form-group">
-                <label>الفئة</label>
-                <select name="categoryId" required id="categorySelect">
-                    <option value="677bf24f4928cab5ec01e726">حلقة ساحرة / Magical Hoop</option>
-                    <option value="677bf24f4928cab5ec01e727">قلادة / Necklace</option>
-                    <option value="677bf24f4928cab5ec01e728">أساور / Bracelets</option>
-                    <option value="677bf24f4928cab5ec01e729">خواتم / Rings</option>
-                    <option value="677bf24f4928cab5ec01e730">أطقم كاملة / Sets</option>
-                    <option value="677bf24f4928cab5ec01e731">تصاميم خاصة / Custom Designs</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>السعر</label>
-                <input type="number" name="price" required>
-            </div>
-            <div class="form-group">
-                <label>الوصف</label>
-                <textarea name="description"></textarea>
-            </div>
-            <div class="form-group">
-                <label>صورة المنتج</label>
-                <input type="file" name="image" accept="image/*" required>
-            </div>
-            <button type="submit" class="btn btn-primary">حفظ المنتج</button>
+          <div class="form-group">
+            <label>اسم المنتج</label>
+            <input type="text" name="productName" required />
+          </div>
+          <div class="form-group">
+            <label>الفئة</label>
+            <select name="categoryId" required id="categorySelect">
+              <option value="67807077dcce9de4d2767fbb">
+                حلقة ساحرة / Magical Hoop
+              </option>
+              <option value="678070addcce9de4d2767fbf">قلادة / Necklace</option>
+              <option value="678070d6dcce9de4d2767fc3">
+                أساور / Bracelets
+              </option>
+              <option value="678070f2dcce9de4d2767fc7">خواتم / Rings</option>
+              <option value="678071b4dcce9de4d2767fcb">
+                أطقم كاملة / Sets
+              </option>
+              <option value="678071e0dcce9de4d2767fcf">
+                تصاميم خاصة / Custom Designs
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>السعر</label>
+            <input type="number" name="price" required />
+          </div>
+          <div class="form-group">
+            <label>الوصف</label>
+            <textarea name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label>صورة المنتج</label>
+            <input type="file" name="image" accept="image/*" required />
+          </div>
+          <button type="submit" class="btn btn-primary">حفظ المنتج</button>
         </form>
+      </div>
     </div>
-</div>
 
-<script>
-// دالة تحميل الفئات في القائمة المنسدلة
-async function loadCategories() {
-    const categories = await getCategories();
-    const categorySelect = document.getElementById('categorySelect');
-    categorySelect.innerHTML = categories.map(category => 
-        `<option value="${category._id}">${category.name}</option>`
-    ).join('');
-}
-
-// معالجة إضافة المنتج
-document.getElementById('addProductForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    
-    formData.append('image', document.querySelector('input[name="image"]').files[0]);
-    formData.append('categoryId', document.querySelector('select[name="categoryId"]').value);
-    formData.append('name', document.querySelector('input[name="name"]').value);
-    formData.append('description', document.querySelector('textarea[name="description"]').value);
-    formData.append('price', document.querySelector('input[name="price"]').value);
-
-    try {
-        const response = await fetch(`${apisEndPoint}/products`, {
-            method: 'POST',
-            body: formData
-        });
-
-        const result = await response.json();
-        
-        if (response.ok) {
-            alert('تم إضافة المنتج بنجاح');
-            document.getElementById('addProductModal').style.display = 'none';
-            e.target.reset();
-            loadProducts();
+    <script>
+      const token = sessionStorage.getItem("authToken");
+      // دالة تحميل الفئات في القائمة المنسدلة
+      async function loadCategories() {
+        async function getCategories() {
+          try {
+            const response = await fetch(
+              `http://localhost:3000/api/categories`,
+              {
+                headers: {
+                  Authorization: `rand__${token}`,
+                },
+              }
+            );
+            const data = await response.json();
+            console.log(data);
+            return data.categories;
+          } catch (error) {
+            console.error("Error fetching categories:", error);
+            throw error;
+          }
         }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('حدث خطأ في إضافة المنتج');
-    }
-});
+        const categories = await getCategories();
+        const categorySelect = document.getElementById("categorySelect");
+        categorySelect.innerHTML = categories
+          .map(
+            (category) =>
+              `<option value="${category._id}">${category.name}</option>`
+          )
+          .join("");
+      }
 
-// تحميل الفئات عند فتح الصفحة
-document.addEventListener('DOMContentLoaded', () => {
-    loadCategories();
-});
-</script>
-<script>function showAddProductModal() {
-    const modal = document.getElementById('addProductModal');
-    modal.style.display = 'block';
-}
+      // تحميل الفئات عند فتح الصفحة
+      document.addEventListener("DOMContentLoaded", () => {
+        loadCategories();
+      });
+    </script>
+    <script>
+      function showAddProductModal() {
+        const modal = document.getElementById("addProductModal");
+        modal.style.display = "block";
+      }
 
-// إضافة معالج النقر على زر الإضافة
-document.querySelector('.btn-primary').addEventListener('click', showAddProductModal);
+      // إضافة معالج النقر على زر الإضافة
+      document
+        .querySelector(".btn-primary")
+        .addEventListener("click", showAddProductModal);
 
-// إغلاق Modal عند النقر خارجه
-window.onclick = function(event) {
-    const modal = document.getElementById('addProductModal');
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-}
-</script>
-<script>document.getElementById('addProductForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    
-    // تجميع البيانات من النموذج
-    const imageFile = document.querySelector('input[name="image"]').files[0];
-    const categoryId = document.querySelector('select[name="categoryId"]').value;
-    const name = document.querySelector('input[name="name"]').value;
-    const description = document.querySelector('textarea[name="description"]').value;
-    const price = document.querySelector('input[name="price"]').value;
-
-    // إضافة البيانات للـ FormData
-    formData.append('image', imageFile);
-    formData.append('categoryId', categoryId);
-    formData.append('name', name);
-    formData.append('description', description);
-    formData.append('price', price);
-
-    try {
-        const response = await fetch(`${apisEndPoint}/products`, {
-            method: 'POST',
-            body: formData
-        });
-
-        const data = await response.json();
-        
-        if (response.ok) {
-            alert('تم إضافة المنتج بنجاح');
-            document.getElementById('addProductModal').style.display = 'none';
-            e.target.reset();
-            // تحديث قائمة المنتجات
-            loadProducts();
-        } else {
-            throw new Error(data.message || 'حدث خطأ في إضافة المنتج');
+      // إغلاق Modal عند النقر خارجه
+      window.onclick = function (event) {
+        const modal = document.getElementById("addProductModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
         }
-    } catch (error) {
-        console.log('Error details:', error);
-        alert('حدث خطأ في إضافة المنتج: ' + error.message);
-    }
-});
-const apisEndPoint = "https://asala-jewelry-1.onrender.com/api";
+      };
+      document
+        .getElementById("addProductForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const formData = new FormData();
 
-document.getElementById('addProductForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    
-    formData.append('image', document.querySelector('input[name="image"]').files[0]);
-    formData.append('categoryId', document.querySelector('select[name="categoryId"]').value);
-    formData.append('name', document.querySelector('input[name="name"]').value);
-    formData.append('description', document.querySelector('textarea[name="description"]').value);
-    formData.append('price', document.querySelector('input[name="price"]').value);
+          // تجميع البيانات من النموذج
+          const imageFile = document.querySelector('input[name="image"]')
+            .files[0];
+          if (!imageFile) {
+            console.error("No image file selected.");
+          }
+          const categoryId = document.querySelector(
+            'select[name="categoryId"]'
+          ).value;
+          const name = document.querySelector(
+            'input[name="productName"]'
+          ).value;
+          const description = document.querySelector(
+            'textarea[name="description"]'
+          ).value;
+          const price = document.querySelector('input[name="price"]').value;
 
-    console.log('Sending data:', Object.fromEntries(formData));
+          // إضافة البيانات للـ FormData
+          formData.append("image", imageFile);
+          formData.append("categoryId", categoryId);
+          formData.append("name", name);
+          formData.append("description", description);
+          formData.append("price", price);
 
-    const response = await fetch(`${apisEndPoint}/products`, {
-        method: 'POST',
-        body: formData
-    });
+          try {
+            const response = await fetch(`http://localhost:3000/api/products`, {
+              method: "POST",
+              body: formData,
+              headers: {
+                Authorization: `rand__${token}`,
+              },
+            });
 
-    const result = await response.json();
-    console.log('Response:', result);
+            const data = await response.json();
 
-    if (response.ok) {
-        alert('تم إضافة المنتج بنجاح');
-        location.reload();
-    }
-});
-
-</script>
-</body>
+            if (response.ok) {
+              alert("تم إضافة المنتج بنجاح");
+              document.getElementById("addProductModal").style.display = "none";
+              e.target.reset();
+            } else {
+              throw new Error(data.message || "حدث خطأ في إضافة المنتج");
+            }
+          } catch (error) {
+            console.log("Error details:", error);
+            alert("حدث خطأ في إضافة المنتج: " + error.message);
+          }
+        });
+    </script>
+  </body>
 </html>
