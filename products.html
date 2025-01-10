@@ -468,6 +468,8 @@
               <li class="nav-item">
                 <a class="nav-link" href="login.html">Login</a>
               </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" id="logout" style="display: none">Logout</a>
               <!-- Shopping Bag Icon -->
               <li class="nav-item shopping-bag">
                 <a class="nav-link" href="#cart"
@@ -625,6 +627,33 @@
     </section>
 
     <script>
+         document.addEventListener("DOMContentLoaded", function () {
+        const authToken = sessionStorage.getItem("authToken"); // Retrieve the token from sessionStorage
+        const loginLink = document.querySelector(
+          ".nav-link[href='login.html']"
+        ); // Login link
+        const logoutButton = document.getElementById("logout"); // Logout button
+
+        // Show/hide buttons based on authToken
+        if (authToken) {
+          // User is logged in
+          if (loginLink) loginLink.style.display = "none"; // Hide login link
+          if (logoutButton) logoutButton.style.display = "inline-block"; // Show logout button
+        } else {
+          // User is not logged in
+          if (loginLink) loginLink.style.display = "inline-block"; // Show login link
+          if (logoutButton) logoutButton.style.display = "none"; // Hide logout button
+        }
+
+        // Add logout functionality
+        if (logoutButton) {
+          logoutButton.addEventListener("click", function () {
+            sessionStorage.removeItem("authToken"); // Remove token from sessionStorage
+            alert("You have been logged out.");
+            window.location.reload(); // Refresh the page to update the UI
+          });
+        }
+      });
       function toggleProducts(categoryId) {
         let allProducts = document.querySelectorAll(".product-item");
         allProducts.forEach((list) => (list.style.display = "none"));
@@ -634,6 +663,10 @@
         Array.from(selectedProducts).forEach((product) => {
           product.style.display = "flex";
         });
+      }
+      function showAllProducts() {
+        let allProducts = document.querySelectorAll(".product-item");
+        allProducts.forEach((list) => (list.style.display = "flex"));
       }
     </script>
     <script src="script/products.js"></script>
@@ -749,6 +782,17 @@
         `;
           categoriesContainer.innerHTML += categoryElement;
         });
+        const categoryElement = `
+        <div class="category-item" onclick="showAllProducts()">
+            <img
+              src="img/logo3.jpg"
+              alt="all products"
+              class="category-img"
+            />
+            <p>All Products</p>
+          </div>
+        `;
+        categoriesContainer.innerHTML += categoryElement;
       }
 
       async function fetchProducts() {
