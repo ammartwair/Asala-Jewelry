@@ -311,6 +311,38 @@
 
     <script>
       const token = sessionStorage.getItem("authToken");
+
+      async function getUserData() {
+        // Example: Retrieve user data from your backend or session storage
+        const response = await fetch(
+          "http://localhost:3000/api/users/userData",
+          {
+            headers: {
+              Authorization: `rand__${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+
+        return response.json();
+      }
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        try {
+          const data = await getUserData();
+          const user = data.user;
+          if (user.role !== "Admin") {
+            alert("Access denied. Admins only.");
+            window.location.href = "/login.html"; // Redirect to login or another page
+          }
+        } catch (err) {
+          console.error("Error:", err.message);
+        }
+      });
+
       // دالة تحميل الفئات في القائمة المنسدلة
       async function loadCategories() {
         async function getCategories() {
@@ -324,7 +356,6 @@
               }
             );
             const data = await response.json();
-            console.log(data);
             return data.categories;
           } catch (error) {
             console.error("Error fetching categories:", error);
